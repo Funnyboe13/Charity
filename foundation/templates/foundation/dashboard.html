@@ -1,0 +1,148 @@
+{% extends "foundation/base.html" %}
+
+{% block title %}Dashboard | Halal Islamic Charity Foundation{% endblock %}
+
+{% block content %}
+
+<style>
+    .dashboard {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .dashboard-title {
+        text-align: center;
+        color: #c9922c;
+        margin-bottom: 30px;
+    }
+
+    .cards {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        width: 220px;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+        color: #c9922c;
+        font-size: 35px;
+        margin: 10px;
+    }
+
+    .card p {
+        color: #555;
+        font-weight: bold;
+    }
+
+    .donations {
+        margin-top: 40px;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .donations h2 {
+        color: #c9922c;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background: #f5f5f5;
+    }
+</style>
+
+<div class="dashboard">
+
+    <h1 class="dashboard-title">
+        Foundation Dashboard
+    </h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>{{ total_donations }}</h2>
+            <p>Total Donations</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ total_volunteers }}</h2>
+            <p>Total Volunteers</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ total_activities }}</h2>
+            <p>Total Activities</p>
+        </div>
+
+    </div>
+
+    <div class="donations">
+
+        <h2>Recent Donations</h2>
+
+        <table>
+            <tr>
+                <th>Donor</th>
+                <th>Amount</th>
+                <th>Purpose</th>
+                <th>Date</th>
+            </tr>
+
+            {% for donation in recent_donations %}
+            <tr>
+                <td>{{ donation.donor_name }}</td>
+                <td>{{ donation.amount }}</td>
+                <td>{{ donation.purpose }}</td>
+                <td>{{ donation.date }}</td>
+            </tr>
+
+            {% empty %}
+            <tr>
+                <td colspan="4">No donations yet.</td>
+            </tr>
+            {% endfor %}
+
+
+        </table>
+
+    </div>
+
+</div>
+<h2>My Donations</h2>
+{% if my_donations %}
+<table>
+  <tr><th>Date</th><th>Purpose</th><th>Amount</th><th>Status</th></tr>
+  {% for d in my_donations %}
+  <tr>
+    <td>{{ d.date }}</td>
+    <td>{{ d.purpose }}</td>
+    <td>{{ d.amount }}</td>
+    <td>{{ d.status }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>You haven't made any donations yet.</p>
+{% endif %}
+{% endblock %}

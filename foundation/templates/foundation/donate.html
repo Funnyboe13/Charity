@@ -1,0 +1,152 @@
+{% extends "foundation/base.html" %}
+
+{% block title %}Donate | Halal Islamic Charity Foundation{% endblock %}
+
+{% block content %}
+
+<style>
+    .donate-page {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    .donate-card {
+        background: white;
+        padding: 40px;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .donate-title {
+        text-align: center;
+        color: #c9922c;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .donate-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #c9922c;
+        box-shadow: 0 0 5px rgba(201, 146, 44, 0.3);
+    }
+
+    .error-box {
+        background: #ffe6e6;
+        color: #b00020;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .donate-button {
+        width: 100%;
+        padding: 14px;
+        background: #c9922c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .donate-button:hover {
+        background: #a97818;
+    }
+
+    .thank-you {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+        font-size: 14px;
+    }
+</style>
+
+<div class="donate-page">
+
+    <div class="donate-card">
+
+        <h1 class="donate-title">Make a Donation</h1>
+
+        <p class="donate-subtitle">
+            Your generosity can help us support people and
+            communities in need.
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="error-box">
+                    Please fix the errors below.
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+
+                    <label>{{ field.label }}</label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <div style="color: #b00020; margin-top: 5px;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="donate-button">
+                Donate Now
+            </button>
+
+        </form>
+
+        <p class="thank-you">
+            Thank you for supporting Halal Islamic Charity Foundation ❤️
+        </p>
+
+    </div>
+
+</div>
+
+    {% endblock %}

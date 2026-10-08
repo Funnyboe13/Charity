@@ -1,0 +1,75 @@
+{% extends "foundation/base.html" %}
+
+{% block title %}Home | Halal Islamic Charity Foundation{% endblock %}
+
+{% block content %}
+
+<div class="hero text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to Our Charity Foundation</h1>
+        <p class="lead">Helping people. Changing lives. Building a better future.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+
+    <section class="mb-5">
+        <h2 class="section-title">Welcome</h2>
+        <p>We are HALAL ISLAMIC CHARITY FOUNDATION, dedicated to supporting people and communities in need.</p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="section-title">Our Mission</h2>
+        <p>Our mission is to make a positive difference by supporting vulnerable people and creating opportunities for a better future.</p>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="section-title">What We Do</h2>
+        <div class="row g-3">
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded h-100">Support children in need</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded h-100">Help vulnerable families</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded h-100">Support education</div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="p-3 border rounded h-100">Support community development</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="section-title">Recent Activities</h2>
+        <ul class="list-group list-group-flush">
+            {% for activity in activities %}
+            <li class="list-group-item">
+                <strong>{{ activity.date }}</strong> &mdash; {{ activity.description }}
+                <span class="text-muted">({{ activity.hours }} hrs)</span>
+            </li>
+            {% empty %}
+            <li class="list-group-item">No recent activities yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="row g-4 text-center">
+        <div class="col-md-6">
+            <div class="stat-card">
+                <div class="stat-number">{{ total_hours }}</div>
+                <div>Total Volunteer Hours</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stat-card">
+                <div class="stat-number">${{ total_raised }}</div>
+                <div>Total Raised</div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

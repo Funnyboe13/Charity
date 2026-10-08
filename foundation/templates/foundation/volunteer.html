@@ -1,0 +1,25 @@
+{% extends "foundation/base.html" %}
+
+{% block title %}Volunteer | Halal Islamic Charity Foundation{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 480px;">
+    <h2 class="section-title mb-4">Become a Volunteer</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger">Please fix the errors below.</div>
+        {% endif %}
+
+        {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn" style="background-color:#c9922c; color:#fff;">Sign Up as Volunteer</button>
+    </form>
+</div>
+{% endblock %}
