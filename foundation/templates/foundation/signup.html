@@ -11,6 +11,9 @@
         {% if form.errors %}
             <div class="alert alert-danger">Please fix the errors below.</div>
         {% endif %}
+        {% for error in form.non_field_errors %}
+    <div class="text-danger small">{{ error }}</div>
+{% endfor %}
 
         {% for field in form %}
         <div class="mb-3">
@@ -19,6 +22,9 @@
             {% if field.help_text %}
             <div class="form-text">{{ field.help_text }}</div>
             {% endif %}
+            {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
         </div>
         {% endfor %}
 
